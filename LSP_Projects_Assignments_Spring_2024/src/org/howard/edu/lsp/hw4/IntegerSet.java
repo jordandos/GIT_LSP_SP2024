@@ -147,25 +147,41 @@ public class IntegerSet {
         }
     }
 
-    // Set intersection, all elements in s1 and s2
+ // Set intersection, all elements in s1 and s2
     /**
-     * Modifies the set to contain only elements that are present in both this set and the specified set.
+     * Returns a new set containing only elements that are present in both this set and the specified set.
      * 
      * @param intSetb the set to perform intersection with
+     * @return a new IntegerSet containing the intersection
      */
-    public void intersect(IntegerSet intSetb) {
-        set.retainAll(intSetb.set);
+    public IntegerSet intersect(IntegerSet intSetb) {
+        IntegerSet result = new IntegerSet(); // Create a new IntegerSet to hold the intersection
+        for (int num : set) {
+            if (intSetb.contains(num)) {
+                result.add(num); // Add the common elements to the result set
+            }
+        }
+        return result;
     }
+
 
     // Set difference, i.e., s1 –s2
     /**
-     * Modifies the set to contain only elements that are present in this set but not in the specified set.
+     * Returns a new set containing only elements that are present in this set but not in the specified set.
      * 
      * @param intSetb the set to perform difference with
+     * @return a new IntegerSet containing the difference
      */
-    public void diff(IntegerSet intSetb) {
-        set.removeAll(intSetb.set);
+    public IntegerSet diff(IntegerSet intSetb) {
+        IntegerSet result = new IntegerSet();
+        for (int num : set) {
+            if (!intSetb.contains(num)) {
+                result.add(num);
+            }
+        }
+        return result;
     }
+
 
     // Set complement, all elements not in s1
     /**
@@ -181,6 +197,7 @@ public class IntegerSet {
         }
         set = complementSet;
     }
+
 
     // Returns true if the set is empty, false otherwise
     /**
